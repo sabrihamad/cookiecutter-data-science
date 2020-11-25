@@ -37,7 +37,13 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 src
-
+## create symbolic link to pool
+link:
+	mkdir /pool/analysis/shamad/$(PROJECT_NAME)
+	ln -s ~/projects/adhoc/$(PROJECT_NAME)/analysis /pool/analysis/shamad/$(PROJECT_NAME)/analysis
+	ln -s ~/projects/adhoc/$(PROJECT_NAME)/reports /pool/analysis/shamad/$(PROJECT_NAME)/reports
+	
+	
 ## Upload Data to S3
 sync_data_to_s3:
 ifeq (default,$(PROFILE))
@@ -59,7 +65,7 @@ create_environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) pandas numpy jupyter plotly
+	conda create --name $(PROJECT_NAME) pandas numpy jupyter plotly -y
 else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
