@@ -39,9 +39,12 @@ lint:
 	flake8 src
 ## create symbolic link to pool
 link:
+
 	mkdir /pool/analysis/shamad/$(PROJECT_NAME)
-	ln -s ~/projects/adhoc/$(PROJECT_NAME)/analysis /pool/analysis/shamad/$(PROJECT_NAME)/analysis
-	ln -s ~/projects/adhoc/$(PROJECT_NAME)/reports /pool/analysis/shamad/$(PROJECT_NAME)/reports
+	mkdir /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)
+	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis
+	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports
+	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/data/scratch /pool/scratch/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)
 	
 	
 ## Upload Data to S3
