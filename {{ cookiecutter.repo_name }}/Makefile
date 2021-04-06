@@ -6,6 +6,7 @@
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = {{ cookiecutter.s3_bucket }}
+PROJECT_OWNER = {{ cookiecutter.project_owner }}
 PROFILE = {{ cookiecutter.aws_profile }}
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
@@ -40,12 +41,12 @@ lint:
 ## create symbolic link to pool
 link:
 
-	mkdir /pool/analysis/shamad/$(PROJECT_NAME)
-	mkdir /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)
-	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis
-	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports
-	ln -s ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/data/scratch /pool/scratch/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)
-	
+	mkdir -p /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis
+	mkdir -p /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis
+	mkdir -p /pool/scratch/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)
+	ln -s /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/analysis
+	ln -s /pool/analysis/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/reports
+	ln -s /pool/scratch/shamad/$(PROJECT_OWNER)/$(PROJECT_NAME) ~/projects/adhoc/$(PROJECT_OWNER)/$(PROJECT_NAME)/data/scratch 
 	
 ## Upload Data to S3
 sync_data_to_s3:
